@@ -1,27 +1,27 @@
-import { getImagesByQuery } from './js/pixabay-api';
+import { getImagesByQuery, errorMess } from './js/pixabay-api';
 import {
   clearGallery,
   createGallery,
-  hideLoader,
-  containerGallery,
+  showLoader,
   setLightbox,
 } from './js/render-functions';
+
 const form = document.querySelector('.form');
 function handleSearch(event) {
   event.preventDefault();
   const searchText = event.target.elements['search-text'].value.trim();
   clearGallery();
-  hideLoader();
+  showLoader();
 
   getImagesByQuery(searchText)
     .then(images => {
       if (images && images.length > 0) {
-        containerGallery.innerHTML = createGallery(images);
+        createGallery(images);
         setLightbox();
       }
     })
     .catch(error => {
-      console.error('Error fetching images:', error);
+      return errorMess(error);
     });
 }
 

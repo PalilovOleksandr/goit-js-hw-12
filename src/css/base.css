@@ -138,3 +138,26 @@ input:focus {
 .card-pic {
   height: 156px;
 }
+
+.btn-render {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 32px;
+  width: 125px;
+  height: 40px;
+  border: none;
+  background-color: #4e75ff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-render:hover {
+  background-color: #6c8cff;
+}
