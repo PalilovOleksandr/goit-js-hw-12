@@ -18,18 +18,31 @@ async function handleSearch(event) {
   event.preventDefault();
   searchText = event.target.elements['search-text'].value.trim();
   page = 1;
+  if (!searchText) {
+    hideLoader();
+    errorMess('Please enter your search request');
+    form.reset();
+    return;
+  }
   form.reset();
   try {
     showLoader();
     const data = await getImagesByQuery(searchText, page);
     clearGallery();
     createGallery(data.hits);
-    if (Math.ceil(data.totalHits / page) > page) {
-      showLoadMoreButton();
+    if (Math.ceil(data.totalHits / 15) === page) {
+      hideLoadMoreButton();
     }
+    showLoadMoreButton();
     hideLoader();
   } catch (error) {
-    console.log(error.message);
+    if (
+      error.message === "Cannot read properties of undefined (reading 'hits')"
+    ) {
+      hideLoader();
+      return;
+    }
+    errorMess(error.message);
   }
 }
 async function onLoadMore() {
