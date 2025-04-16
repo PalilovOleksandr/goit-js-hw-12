@@ -17,7 +17,7 @@ let searchText = '';
 async function handleSearch(event) {
   event.preventDefault();
   searchText = event.target.elements['search-text'].value.trim();
-  page = 34;
+  page = 1;
   if (!searchText) {
     hideLoader();
     errorMess('Please enter your search request');
