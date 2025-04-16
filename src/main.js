@@ -17,7 +17,7 @@ let searchText = '';
 async function handleSearch(event) {
   event.preventDefault();
   searchText = event.target.elements['search-text'].value.trim();
-  page = 1;
+  page = 34;
   if (!searchText) {
     hideLoader();
     errorMess('Please enter your search request');
@@ -31,10 +31,11 @@ async function handleSearch(event) {
     clearGallery();
     createGallery(data.hits);
     if (Math.ceil(data.totalHits / 15) === page) {
-      hideLoadMoreButton();
+      hideLoader();
+      errorMess("We're sorry, but you've reached the end of search results.");
+      return;
     }
     showLoadMoreButton();
-    hideLoader();
   } catch (error) {
     if (
       error.message === "Cannot read properties of undefined (reading 'hits')"
@@ -46,19 +47,19 @@ async function handleSearch(event) {
   }
 }
 async function onLoadMore() {
+  hideLoadMoreButton();
   page++;
   try {
     showLoader();
-    hideLoadMoreButton();
     const data = await getImagesByQuery(searchText, page);
     createGallery(data.hits);
-    showLoadMoreButton();
     scrollCard();
+    hideLoader();
     if (Math.ceil(data.totalHits / 15) === page) {
       errorMess("We're sorry, but you've reached the end of search results.");
-      hideLoadMoreButton();
+      return;
     }
-    hideLoader();
+    showLoadMoreButton();
   } catch (error) {
     errorMess(error);
   }
