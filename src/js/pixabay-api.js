@@ -17,11 +17,11 @@ export async function getImagesByQuery(query, page = 1) {
     },
   });
   if (data.hits.length === 0) {
+    hideLoadMoreButton();
+    hideLoader();
     errorMess(
       `Sorry, there are no images matching your search ${query}. Please try again!`
     );
-    hideLoadMoreButton();
-    hideLoader();
     return;
   } else {
     return data;

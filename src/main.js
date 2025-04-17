@@ -36,16 +36,16 @@ async function handleSearch(event) {
       errorMess("We're sorry, but you've reached the end of search results.");
       return;
     }
-    hideLoader();
     showLoadMoreButton();
   } catch (error) {
     if (
       error.message === "Cannot read properties of undefined (reading 'hits')"
     ) {
-      hideLoader();
       return;
     }
     errorMess(error.message);
+  } finally {
+    hideLoader();
   }
 }
 async function onLoadMore() {
@@ -56,7 +56,6 @@ async function onLoadMore() {
     const data = await getImagesByQuery(searchText, page);
     createGallery(data.hits);
     scrollCard();
-    hideLoader();
     if (Math.ceil(data.totalHits / 15) === page) {
       errorMess("We're sorry, but you've reached the end of search results.");
       return;
@@ -64,6 +63,8 @@ async function onLoadMore() {
     showLoadMoreButton();
   } catch (error) {
     errorMess(error);
+  } finally {
+    hideLoader();
   }
 }
 function scrollCard() {
