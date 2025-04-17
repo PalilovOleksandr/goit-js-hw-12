@@ -35,6 +35,7 @@ async function handleSearch(event) {
       errorMess("We're sorry, but you've reached the end of search results.");
       return;
     }
+    hideLoader();
     showLoadMoreButton();
   } catch (error) {
     if (
