@@ -2,7 +2,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 import { hideLoader, hideLoadMoreButton } from './render-functions';
-
+import pathIcon from '../img/img-error.svg';
 export async function getImagesByQuery(query, page = 1) {
   const { data } = await axios.get('https://pixabay.com/api/', {
     params: {
@@ -39,6 +39,6 @@ export function errorMess(message) {
     transitionOut: 'fadeOutRight',
     progressBarColor: '#B51B1B',
     maxWidth: '432px',
-    iconUrl: '../img/img-error.svg',
+    iconUrl: pathIcon,
   });
 }
