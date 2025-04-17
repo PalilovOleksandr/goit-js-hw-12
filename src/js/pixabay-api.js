@@ -3,6 +3,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 import { hideLoader, hideLoadMoreButton } from './render-functions';
 import pathIcon from '../img/img-error.svg';
+
 export async function getImagesByQuery(query, page = 1) {
   const { data } = await axios.get('https://pixabay.com/api/', {
     params: {

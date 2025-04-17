@@ -32,6 +32,7 @@ async function handleSearch(event) {
     createGallery(data.hits);
     if (Math.ceil(data.totalHits / 15) === page) {
       hideLoader();
+      hideLoadMoreButton();
       errorMess("We're sorry, but you've reached the end of search results.");
       return;
     }
