@@ -36,13 +36,16 @@ async function handleSearch(event) {
       errorMess("We're sorry, but you've reached the end of search results.");
       return;
     }
-    showLoadMoreButton();
-  } catch (error) {
-    if (
-      error.message === "Cannot read properties of undefined (reading 'hits')"
-    ) {
+    if (data.hits.length === 0) {
+      hideLoadMoreButton();
+      hideLoader();
+      errorMess(
+        `Sorry, there are no images matching your search ${searchText}. Please try again!`
+      );
       return;
     }
+    showLoadMoreButton();
+  } catch (error) {
     errorMess(error.message);
   } finally {
     hideLoader();

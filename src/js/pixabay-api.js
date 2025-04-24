@@ -16,16 +16,7 @@ export async function getImagesByQuery(query, page = 1) {
       page,
     },
   });
-  if (data.hits.length === 0) {
-    hideLoadMoreButton();
-    hideLoader();
-    errorMess(
-      `Sorry, there are no images matching your search ${query}. Please try again!`
-    );
-    return;
-  } else {
-    return data;
-  }
+  return data;
 }
 
 export function errorMess(message) {
